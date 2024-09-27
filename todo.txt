@@ -1,0 +1,5 @@
+3. Create stats route
+    i) users in venue
+    ii) users checked out
+    iii) total spend at venue
+4.

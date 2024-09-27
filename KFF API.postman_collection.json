@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "ff8f158e-c71a-448f-badc-ea6e41ce8707",
+		"name": "KFF API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26633656"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3151,\r\n    \"slot_id\": null,\r\n    \"name\": \"Bhaj Pandya\",\r\n    \"email\": \"kumar.pandya@example.com\",\r\n    \"phone_number\": \"44322616\",\r\n    \"nfc_id\": null,\r\n    \"balance\": 0.0,\r\n    \"last_transaction\": null,\r\n    \"time_in\": null,\r\n    \"time_out\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/create_user"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Registered User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rid\": 3152,\r\n    \"slot\": 2,\r\n    \"name\": \"Rhythm Pandya\",\r\n    \"email\": \"kumar.pandya@example.com\",\r\n    \"phone_number\": \"44322616\",\r\n    \"topup_amount\": 0.0,\r\n    \"status\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/create_registered_user"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch User from Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"search\": \"44322616\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/fetch_user"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch User from registered Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"search\": \"44322616\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/fetch_user_registered"
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Nfc",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "ID",
+						"value": "5"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nfc_id\": \"51224\",\r\n    \"cid\": 3151\r\n}"
+				},
+				"url": "http://127.0.0.1:5000/assign_nfc"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vendor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vendor_id\": 53216,\r\n    \"vendor_name\": \"Rtech Name\",\r\n    \"vendor_phone_number\": \"+1234567890\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/add_vendor"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/get_user_balance/3151"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vendor Balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/get_vendor_balance/53216"
+			},
+			"response": []
+		},
+		{
+			"name": "POS Transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vendor_id\": \"53216\",\r\n    \"nfc_id\": \"51224\",\r\n    \"amount\": 1.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/process_transaction"
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Into Venue",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rid\": \"3152\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/sign_in"
+			},
+			"response": []
+		},
+		{
+			"name": "Venue Report",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"auth_key\": \"xcv0b9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/venue_report"
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Out Venue",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nfc_id\": \"51224\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/sign_out"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,66 @@
+2024-09-27 19:00:01,821 - INFO - Executing query: PRAGMA main.table_info("registered_users") with parameters ()
+2024-09-27 19:00:01,823 - INFO - Query executed: PRAGMA main.table_info("registered_users")
+2024-09-27 19:00:01,823 - INFO - Executing query: PRAGMA main.table_info("user") with parameters ()
+2024-09-27 19:00:01,824 - INFO - Query executed: PRAGMA main.table_info("user")
+2024-09-27 19:00:01,825 - INFO - Executing query: PRAGMA main.table_info("vendor") with parameters ()
+2024-09-27 19:00:01,825 - INFO - Query executed: PRAGMA main.table_info("vendor")
+2024-09-27 19:00:01,826 - INFO - Executing query: PRAGMA main.table_info("transaction") with parameters ()
+2024-09-27 19:00:01,826 - INFO - Query executed: PRAGMA main.table_info("transaction")
+2024-09-27 19:00:02,229 - WARNING -  * Debugger is active!
+2024-09-27 19:00:02,238 - INFO -  * Debugger PIN: 222-236-476
+2024-09-27 19:01:41,209 - INFO - Executing query: PRAGMA main.table_info("registered_users") with parameters ()
+2024-09-27 19:01:41,210 - INFO - Query executed: PRAGMA main.table_info("registered_users")
+2024-09-27 19:01:41,211 - INFO - Executing query: PRAGMA main.table_info("user") with parameters ()
+2024-09-27 19:01:41,212 - INFO - Query executed: PRAGMA main.table_info("user")
+2024-09-27 19:01:41,212 - INFO - Executing query: PRAGMA main.table_info("vendor") with parameters ()
+2024-09-27 19:01:41,213 - INFO - Query executed: PRAGMA main.table_info("vendor")
+2024-09-27 19:01:41,213 - INFO - Executing query: PRAGMA main.table_info("transaction") with parameters ()
+2024-09-27 19:01:41,214 - INFO - Query executed: PRAGMA main.table_info("transaction")
+2024-09-27 19:01:41,269 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-09-27 19:01:41,270 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-27 19:01:41,272 - INFO -  * Restarting with stat
+2024-09-27 19:01:42,284 - INFO - Executing query: PRAGMA main.table_info("registered_users") with parameters ()
+2024-09-27 19:01:42,285 - INFO - Query executed: PRAGMA main.table_info("registered_users")
+2024-09-27 19:01:42,286 - INFO - Executing query: PRAGMA main.table_info("user") with parameters ()
+2024-09-27 19:01:42,287 - INFO - Query executed: PRAGMA main.table_info("user")
+2024-09-27 19:01:42,287 - INFO - Executing query: PRAGMA main.table_info("vendor") with parameters ()
+2024-09-27 19:01:42,288 - INFO - Query executed: PRAGMA main.table_info("vendor")
+2024-09-27 19:01:42,289 - INFO - Executing query: PRAGMA main.table_info("transaction") with parameters ()
+2024-09-27 19:01:42,289 - INFO - Query executed: PRAGMA main.table_info("transaction")
+2024-09-27 19:01:42,323 - WARNING -  * Debugger is active!
+2024-09-27 19:01:42,331 - INFO -  * Debugger PIN: 222-236-476
+2024-09-27 19:02:28,605 - INFO - New instance added: <RegisteredUsers 3152 - Rhythm Pandya>
+2024-09-27 19:02:28,608 - INFO - Executing query: INSERT INTO registered_users (rid, slot, name, email, phone, top_up_balance, status) VALUES (?, ?, ?, ?, ?, ?, ?) with parameters (3152, 2, 'Rhythm Pandya', 'kumar.pandya@example.com', '44322616', 0.0, '0')
+2024-09-27 19:02:28,872 - INFO - 127.0.0.1 - - [27/Sep/2024 19:02:28] "[35m[1mPOST /create_registered_user HTTP/1.1[0m" 500 -
+2024-09-27 19:02:40,106 - INFO - Executing query: SELECT user.customer_id AS user_customer_id, user.slot_id AS user_slot_id, user.customer_class AS user_customer_class, user.name AS user_name, user.email AS user_email, user.phone_number AS user_phone_number, user.nfc_id AS user_nfc_id, user.balance AS user_balance, user.last_transaction AS user_last_transaction, user.status AS user_status, user.time_in AS user_time_in, user.time_out AS user_time_out 
+FROM user 
+WHERE user.phone_number = ? OR user.email = ? with parameters ('44322616', '44322616')
+2024-09-27 19:02:40,106 - INFO - Query executed: SELECT user.customer_id AS user_customer_id, user.slot_id AS user_slot_id, user.customer_class AS user_customer_class, user.name AS user_name, user.email AS user_email, user.phone_number AS user_phone_number, user.nfc_id AS user_nfc_id, user.balance AS user_balance, user.last_transaction AS user_last_transaction, user.status AS user_status, user.time_in AS user_time_in, user.time_out AS user_time_out 
+FROM user 
+WHERE user.phone_number = ? OR user.email = ?
+2024-09-27 19:02:40,108 - INFO - 127.0.0.1 - - [27/Sep/2024 19:02:40] "GET /fetch_user HTTP/1.1" 200 -
+2024-09-27 19:18:05,451 - INFO -  * Detected change in 'D:\\Apps\\KFF\\models.py', reloading
+2024-09-27 19:18:05,597 - INFO -  * Restarting with stat
+2024-09-27 19:20:29,216 - INFO - Executing query: PRAGMA main.table_info("registered_users") with parameters ()
+2024-09-27 19:20:29,217 - INFO - Query executed: PRAGMA main.table_info("registered_users")
+2024-09-27 19:20:29,218 - INFO - Executing query: PRAGMA main.table_info("user") with parameters ()
+2024-09-27 19:20:29,218 - INFO - Query executed: PRAGMA main.table_info("user")
+2024-09-27 19:20:29,219 - INFO - Executing query: PRAGMA main.table_info("vendor") with parameters ()
+2024-09-27 19:20:29,219 - INFO - Query executed: PRAGMA main.table_info("vendor")
+2024-09-27 19:20:29,220 - INFO - Executing query: PRAGMA main.table_info("transaction") with parameters ()
+2024-09-27 19:20:29,220 - INFO - Query executed: PRAGMA main.table_info("transaction")
+2024-09-27 19:20:29,584 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-09-27 19:20:29,584 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-27 19:20:29,596 - INFO -  * Restarting with stat
+2024-09-27 19:20:30,695 - INFO - Executing query: PRAGMA main.table_info("registered_users") with parameters ()
+2024-09-27 19:20:30,697 - INFO - Query executed: PRAGMA main.table_info("registered_users")
+2024-09-27 19:20:30,698 - INFO - Executing query: PRAGMA main.table_info("user") with parameters ()
+2024-09-27 19:20:30,698 - INFO - Query executed: PRAGMA main.table_info("user")
+2024-09-27 19:20:30,699 - INFO - Executing query: PRAGMA main.table_info("vendor") with parameters ()
+2024-09-27 19:20:30,700 - INFO - Query executed: PRAGMA main.table_info("vendor")
+2024-09-27 19:20:30,702 - INFO - Executing query: PRAGMA main.table_info("transaction") with parameters ()
+2024-09-27 19:20:30,703 - INFO - Query executed: PRAGMA main.table_info("transaction")
+2024-09-27 19:20:30,753 - WARNING -  * Debugger is active!
+2024-09-27 19:20:30,765 - INFO -  * Debugger PIN: 222-236-476
