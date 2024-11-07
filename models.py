@@ -7,12 +7,22 @@ db = SQLAlchemy()
 # Registered Users model
 class RegisteredUsers(db.Model):
     rid = db.Column(db.String(100), primary_key=True)  # Registration ID (RID)
-    slot = db.Column(db.String(50), nullable=False)  # Slot
+    slot = db.Column(db.String(50), nullable=False)  # Slot (*** change to array ***)
     name = db.Column(db.String(100), nullable=False)  # Name
+    age = db.Column(db.String(100), nullable=True)
     email = db.Column(db.String(120), nullable=False)  # Email
     phone = db.Column(db.String(15), nullable=False)  # Phone
     top_up_balance = db.Column(db.Float, nullable=False, default=0.0)  # Top-up Balance
-    status = db.Column(db.String(100), nullable=False)
+    chakra = db.Column(db.String(100), nullable=False)
+    lang_used = db.Column(db.String(100), nullable=False)
+    created_at = db.Column(db.String(100), nullable=False)
+    registration_fees = db.Column(db.String(100), nullable=False)
+    total_amt = db.Column(db.String(100), nullable=False)
+    volunteer = db.Column(db.String(100), nullable=False)
+    pmt_status = db.Column(db.String(100), nullable=False)
+    code = db.Column(db.String(100), nullable=True)
+    log = db.Column(db.String(100), nullable=True)
+    
 
     # Serialize method to return data as a dictionary
     def serialize(self):
@@ -20,10 +30,19 @@ class RegisteredUsers(db.Model):
             'rid': self.rid,
             'slot': self.slot,
             'name': self.name,
+            'age': self.age,
             'email': self.email,
             'phone': self.phone,
             'top_up_balance': self.top_up_balance,
-            'status': self.status
+            'chakra': self.chakra,
+            'lang_used': self.lang_used,
+            'created_at': self.created_at,
+            'registration_fees': self.registration_fees,
+            'total_amt': self.total_amt,
+            'volunteer': self.volunteer,
+            'pmt_status': self.pmt_status,
+            'code': self.code,
+            'log': self.log
         }
 
     # Representation method to make debugging easier
