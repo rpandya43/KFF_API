@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import random
 import string
 from datetime import datetime, timezone
-from models import db,RegisteredUsers,User,Vendor,Transaction
+from models import db,RegisteredUsers,User,Vendor,Transaction,RegisteredSevakas
 from flask_migrate import Migrate
 import json
 
@@ -17,118 +17,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres.lnimabjrgjtznupmd
 db.init_app(app)
 
 migrate = Migrate(app, db)
-
-# # Registered Users model
-# class RegisteredUsers(db.Model):
-#     rid = db.Column(db.String(100), primary_key=True)  # Registration ID (RID)
-#     slot = db.Column(db.String(50), nullable=False)  # Slot
-#     name = db.Column(db.String(100), nullable=False)  # Name
-#     email = db.Column(db.String(120), nullable=False)  # Email
-#     phone = db.Column(db.String(15), nullable=False)  # Phone
-#     top_up_balance = db.Column(db.Float, nullable=False, default=0.0)  # Top-up Balance
-#     status = db.Column(db.String(100), nullable=False)
-#
-#     # Serialize method to return data as a dictionary
-#     def serialize(self):
-#         return {
-#             'rid': self.rid,
-#             'slot': self.slot,
-#             'name': self.name,
-#             'email': self.email,
-#             'phone': self.phone,
-#             'top_up_balance': self.top_up_balance,
-#             'status': self.status
-#         }
-#
-#     # Representation method to make debugging easier
-#     def __repr__(self):
-#         return f"<RegisteredUsers {self.rid} - {self.name}>"
-#
-# # User model
-# class User(db.Model):
-#     customer_id = db.Column(db.Integer, primary_key=True)  # User ID
-#     slot_id = db.Column(db.Integer, nullable=True)  # Slot ID
-#     customer_class = db.Column(db.String, nullable=False)
-#     name = db.Column(db.String(100), nullable=True)  # Full Name
-#     email = db.Column(db.String(100), nullable=True)  # Email
-#     phone_number = db.Column(db.String(20), nullable=True)  # Phone Number
-#     nfc_id = db.Column(db.String(100), nullable=True)  # NFC ID
-#     balance = db.Column(db.Float, default=0.0)  # Balance
-#     last_transaction = db.Column(db.String(100), nullable=True)  # Last Transaction
-#     status = db.Column(db.String(100), nullable=False)
-#     time_in = db.Column(db.DateTime, nullable=True)  # Time In
-#     time_out = db.Column(db.DateTime, nullable=True)  # Time Out
-#
-#
-#     def serialize(self):
-#         return {
-#             'customer_id': self.customer_id,
-#             'slot_id': self.slot_id,
-#             'customer_class': self.customer_class,
-#             'name': self.name,
-#             'email': self.email,
-#             'phone_number': self.phone_number,
-#             'nfc_id': self.nfc_id,
-#             'balance': self.balance,
-#             'last_transaction': self.last_transaction,
-#             'status': self.status,
-#             'time_in': self.time_in,
-#             'time_out': self.time_out,
-#         }
-#
-#     def __repr__(self):
-#         return f"<User {self.name}>"
-#
-# # Vendor model
-# class Vendor(db.Model):
-#     vendor_id = db.Column(db.Integer, primary_key=True)  # Vendor ID
-#     vendor_name = db.Column(db.String(100), nullable=False)  # Vendor Name
-#     vendor_phone_number = db.Column(db.String(20), nullable=False)  # Vendor Phone Number
-#     vendor_balance = db.Column(db.Float, default=0.0)  # Vendor Balance
-#     vendor_last_transaction = db.Column(db.String(100), nullable=True)  # Vendor Last Transaction
-#
-#     def serialize(self):
-#         return {
-#             'vendor_id': self.vendor_id,
-#             'vendor_name': self.vendor_name,
-#             'vendor_phone_number': self.vendor_phone_number,
-#             'vendor_balance': self.vendor_balance,
-#             'vendor_last_transaction': self.vendor_last_transaction,
-#         }
-#
-#     def __repr__(self):
-#         return f"<Vendor {self.vendor_name}>"
-#
-# # Transaction model
-# class Transaction(db.Model):
-#     transaction_id = db.Column(db.String(100), primary_key=True)  # Transaction ID
-#     nfc_id = db.Column(db.String(100), nullable=False)  # NFC ID
-#     name = db.Column(db.String(100), nullable=False)  # Name
-#     vendor_id = db.Column(db.Integer, db.ForeignKey('vendor.vendor_id'), nullable=False)
-#     transaction_amount = db.Column(db.Float, nullable=False)  # Transaction Amount
-#     status = db.Column(db.String(50), nullable=False)  # Status
-#     date_time = db.Column(db.DateTime, nullable=True)  # Date and Time
-#     type_of_transaction = db.Column(db.String(50), nullable=False)  # Type of Transaction
-#     customer_id = db.Column(db.Integer, db.ForeignKey('user.customer_id'), nullable=False)
-#
-#
-#     user = db.relationship('User', backref=db.backref('transactions', lazy=True))
-#
-#     def serialize(self):
-#         return {
-#             'transaction_id': self.transaction_id,
-#             'nfc_id': self.nfc_id,
-#             'name': self.name,
-#             'vendor_id': self.vendor_id,
-#             'transaction_amount': self.transaction_amount,
-#             'status': self.status,
-#             'date_time': self.date_time,
-#             'type_of_transaction': self.type_of_transaction,
-#             'customer_id': self.customer_id
-#         }
-#
-#     def __repr__(self):
-#         return f"<Transaction {self.id} by {self.name}>"
 
 # Create the database and table
 with app.app_context():
@@ -414,36 +302,7 @@ def top_up_account():
         }
     }), 200
 
-# Route 9: Read all Pre Registrations to get Registration ID
-@app.route('/find_registered_user', methods=['GET'])
-def find_registered_user():
-    # Get the phone number or email from query parameters
-    data = request.json
-    email = data.get('email')
-    phone = data.get('phone')
-
-    # Validate that either phone or email is provided
-    if not phone and not email:
-        return jsonify({"error": "You must provide either a phone number or email."}), 400
-
-    # Query the database for matching users
-    query = RegisteredUsers.query
-    if phone:
-        query = query.filter_by(phone=phone)
-    if email:
-        query = query.filter_by(email=email)
-
-    # Execute the query
-    users = query.all()
-
-    # If no users found, return a message
-    if not users:
-        return jsonify({"message": "No users found matching the provided criteria."}), 404
-
-    # Serialize the users and return them
-    return jsonify([user.serialize() for user in users]), 200
-
-# Route 9.a: Alternate route to 9
+# Route 9.a: Fetch Atendee
 @app.route('/fetch_user_registered', methods=['GET'])
 def fetch_user_registered():
     # Get the search parameter from the request JSON
@@ -474,6 +333,40 @@ def fetch_user_registered():
             # Add any other fields you want to return
         }
         for RegisteredUsers in users
+    ]
+
+    return jsonify(user_data), 200
+
+# Route 9.b: Fetch Sevaka
+@app.route('/fetch_sevaka_registered', methods=['GET'])
+def fetch_sevaka_registered():
+    # Get the search parameter from the request JSON
+    data = request.json
+    search = data.get('search')
+
+    if not search:
+        return jsonify({'error': 'No search parameter provided.'}), 400
+
+    # Query the database for users matching either phone_number or email in the RegisteredUsers table
+    users = RegisteredSevakas.query.filter(
+        (RegisteredSevakas.phone == search) |
+        (RegisteredSevakas.email == search)
+    ).all()
+
+    if not users:
+        return jsonify({'message': 'No Sevaka found.'}), 404
+
+    # Serialize user data to include `customer_id` as `rid`
+    user_data = [
+        {
+            'sid': RegisteredSevakas.rid,  # Assuming customer_id is rid
+            'slot': RegisteredSevakas.slot,
+            'full_name': RegisteredSevakas.name,   # Full Name of the user
+            'email': RegisteredSevakas.email,      # Email of the user
+            'phone_number': RegisteredSevakas.phone  # Phone number
+            # Add any other fields you want to return
+        }
+        for RegisteredSevakas in users
     ]
 
     return jsonify(user_data), 200
@@ -543,7 +436,72 @@ def create_user_from_rid():
         # Handle any unexpected case where the status is neither 0 nor 1
         return jsonify({"error": "Invalid registration status."}), 400
 
-# Route 11: add user to preregistered list
+# Route 11: Registerd Sevaka
+@app.route('/sign_in_sevaka', methods=['POST'])
+def create_user_from_sid():
+    data = request.json
+    sid = data.get('sid')
+    slot = data.get('slot')
+
+    # Check if RID is provided
+    if not sid:
+        return jsonify({"error": "SID is required."}), 400
+
+    # Find the registered user by RID
+    registered_sevaka = RegisteredSevakas.query.filter_by(sid=sid).first()
+    if not registered_sevaka:
+        return jsonify({"error": "No registered user found with the provided SID."}), 404
+  
+    # Check if the provided current_slot is in the list of available slots
+    if str(slot) not in str(registered_sevaka.service_slot):
+        return jsonify({
+            "error": f"User is not registered for the current slot: {slot}. Available slots: {registered_sevaka.slot}"
+        }), 400
+
+    # Check the status of the registered user
+    if registered_sevaka.log == '1':
+        # User is already registered, find the corresponding user in the User table
+        existing_user = User.query.filter_by(name=registered_sevaka.name).first()
+        if existing_user:
+            return jsonify({
+                "message": f"User already checked in with user ID: {existing_user.customer_id}"
+            }), 200
+        else:
+            return jsonify({
+                "error": "User status is 1 but no user found in the User table."
+            }), 404
+
+    # Only proceed if status is 0 (user is not yet registered)
+    if registered_sevaka.log == '0' :
+        # Generate a new user ID (auto-generated by the DB)
+        new_user = User(
+            slot_id=slot,
+            customer_class='sevaka',
+            name=registered_sevaka.name,
+            email=registered_sevaka.email,
+            phone_number=registered_sevaka.phone,
+            balance="100",
+            time_in=datetime.now(timezone.utc),  # Set Time In to now
+            status='0'
+        )
+
+        # Add the new user to the session and commit
+        db.session.add(new_user)
+        db.session.commit()
+
+        # Update the registration status in RegisteredUsers table
+        registered_sevaka.log = '1'
+        db.session.commit()
+
+        return jsonify({
+            "message": "User registered successfully.",
+            "user_id": new_user.customer_id
+        }), 201
+    else:
+        # Handle any unexpected case where the status is neither 0 nor 1
+        return jsonify({"error": "Invalid registration status."}), 400
+
+# Route 12: add user to preregistered list
 @app.route('/create_registered_user', methods=['POST'])
 def pre_register_user():
     data = request.json
@@ -583,7 +541,7 @@ def pre_register_user():
         "top_up_balance": topup_amount
     }), 201
 
-# Route 12: Sign out user
+# Route 13: Sign out user
 @app.route('/sign_out', methods=['POST'])
 def close_user():
     try:
@@ -613,6 +571,7 @@ def close_user():
         # Handle any exceptions and return a 500 Internal Server Error
         return jsonify({'error': str(e)}), 500
 
+# Route 14:
 @app.route('/venue_report', methods=['GET'])
 def venue_report():
     try:
